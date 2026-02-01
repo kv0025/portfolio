@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartik Verma - UI/UX Designer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple-dark: #1a0b2e;
+            --purple-mid: #2d1b4e;
+            --purple-bright: #6b4ce8;
+            --blue-accent: #4a90e2;
+            --pink-accent: #e84393;
+            --white: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, 
+                #0f0620 0%, 
+                #1a0b2e 25%,
+                #2d1b4e 50%,
+                #1f1340 75%,
+                #0f0620 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .gradient-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--purple-bright), transparent);
+            top: -10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--blue-accent), transparent);
+            bottom: -15%;
+            left: -10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--pink-accent), transparent);
+            top: 40%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(15, 6, 32, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--purple-bright), var(--pink-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple-bright), var(--pink-accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 5% 80px;
+        }
+
+        /* Hero Grid Layout */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 100px;
+        }
+
+        /* Left Column - Profile Card */
+        .profile-section {
+            position: sticky;
+            top: 120px;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: fadeInLeft 1s ease forwards 0.2s;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .greeting {
+            font-size: 0.95rem;
+            color: var(--text-tertiary);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--white), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+        }
+
+        .profile-corners {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .corner {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .corner-tl {
+            top: -10px;
+            left: -10px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 10px 0 0 0;
+        }
+
+        .corner-tr {
+            top: -10px;
+            right: -10px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 10px 0 0;
+        }
+
+        .corner-bl {
+            bottom: -10px;
+            left: -10px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 10px;
+        }
+
+        .corner-br {
+            bottom: -10px;
+            right: -10px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 10px 0;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-bright), var(--pink-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(107, 76, 232, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-icon {
+            width: 85px;
+            height: 85px;
+        }
+
+        .card-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--purple-bright);
+            font-size: 0.7rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--purple-bright), var(--pink-accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-item:hover::before {
+            opacity: 0.15;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(107, 76, 232, 0.3);
+        }
+
+        .skill-icon-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Right Column - Content */
+        .content-section {
+            opacity: 0;
+            animation: fadeInRight 1s ease forwards 0.4s;
+        }
+
+        .intro-section {
+            margin-bottom: 5rem;
+        }
+
+        .intro-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--white) 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-text {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            line-height: 1.9;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple-bright), var(--pink-accent));
+            color: var(--white);
+            border: none;
+            box-shadow: 0 10px 30px rgba(107, 76, 232, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(107, 76, 232, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            margin-bottom: 5rem;
+        }
+
+        .section-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--white) 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 60px rgba(107, 76, 232, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .project-content {
+            padding: 1.8rem;
+        }
+
+        .project-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--purple-bright);
+            background: rgba(107, 76, 232, 0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            border: 1px solid rgba(107, 76, 232, 0.3);
+        }
+
+        .project-title {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-link {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--purple-bright);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+            padding: 1rem 2rem;
+            background: rgba(107, 76, 232, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(107, 76, 232, 0.3);
+            transition: all 0.3s ease;
+            word-break: break-all;
+        }
+
+        .contact-email:hover {
+            background: rgba(107, 76, 232, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(107, 76, 232, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--purple-bright), var(--pink-accent));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(107, 76, 232, 0.4);
+            border-color: transparent;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-photo {
+            width: 85%;
+            height: 85%;
+            border-radius: 60%;
+            object-fit: cover;
+        }
+
+        /* Canva skill icon ONLY */
+        .skill-item[title="Canva"] .skill-icon-img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* LinkedIn icon ONLY */
+        .linkedin-link .linkedin-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .linkedin-link:hover .linkedin-icon {
+            filter: brightness(1.15);
+        }
+
+        /* Behance icon ONLY */
+        .behance-link .behance-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .behance-link:hover .behance-icon {
+            filter: brightness(1.15);
+        }
+
+        /* Figma icon ONLY */
+        .Figma-link .Figma-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .Figma-link:hover .Figma-icon {
+            filter: brightness(1.15);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN - COMPREHENSIVE BREAKPOINTS
+           ============================================ */
+
+        /* Large Desktop - 1400px and above */
+        @media (min-width: 1400px) {
+            .container {
+                padding: 140px 5% 100px;
+            }
+        }
+
+        /* Medium Desktop - 1200px to 1399px */
+        @media (max-width: 1399px) {
+            .hero-grid {
+                grid-template-columns: 400px 1fr;
+                gap: 3.5rem;
+            }
+        }
+
+        /* Small Desktop - 1024px to 1199px */
+        @media (max-width: 1199px) {
+            .hero-grid {
+                grid-template-columns: 380px 1fr;
+                gap: 3rem;
+            }
+
+            .profile-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+        }
+
+        /* Tablet Landscape - 900px to 1023px */
+        @media (max-width: 1023px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                margin-bottom: 60px;
+            }
+
+            .profile-section {
+                position: relative;
+                top: 0;
+                max-width: 500px;
+                margin: 0 auto 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro-section {
+                margin-bottom: 4rem;
+            }
+
+            .projects-section {
+                margin-bottom: 4rem;
+            }
+
+            .orb-1,
+            .orb-2,
+            .orb-3 {
+                filter: blur(100px);
+            }
+        }
+
+        /* Tablet Portrait - 768px to 899px */
+        @media (max-width: 899px) {
+            nav {
+                padding: 1.2rem 4%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 100px 4% 60px;
+            }
+
+            .profile-section {
+                max-width: 450px;
+            }
+
+            .contact-section {
+                padding: 3rem 2.5rem;
+            }
+        }
+
+        /* Mobile Landscape and Small Tablets - 600px to 767px */
+        @media (max-width: 767px) {
+            nav {
+                padding: 1rem 4%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 90px 4% 50px;
+            }
+
+            .hero-grid {
+                gap: 2.5rem;
+                margin-bottom: 50px;
+            }
+
+            .profile-card {
+                padding: 2rem 1.5rem;
+                border-radius: 25px;
+            }
+
+            .profile-name {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .profile-image-wrapper,
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .corner {
+                width: 30px;
+                height: 30px;
+                border-width: 2px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .section-text {
+                font-size: 0.85rem;
+            }
+
+            .info-list li {
+                font-size: 0.85rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.6rem;
+            }
+
+            .intro-section {
+                margin-bottom: 3rem;
+            }
+
+            .intro-text {
+                margin-bottom: 2rem;
+            }
+
+            .projects-section {
+                margin-bottom: 3rem;
+            }
+
+            .section-heading {
+                margin-bottom: 2rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-category {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .contact-section {
+                padding: 2.5rem 2rem;
+                border-radius: 25px;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+
+            footer {
+                padding: 2.5rem 4%;
+            }
+        }
+
+        /* Mobile Portrait - 480px to 599px */
+        @media (max-width: 599px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 80px 5% 40px;
+            }
+
+            .profile-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .greeting {
+                font-size: 0.85rem;
+            }
+
+            .profile-name {
+                font-size: 1.8rem;
+            }
+
+            .profile-image-wrapper,
+            .profile-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .card-section {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 0.9rem 2rem;
+            }
+
+            .projects-grid {
+                gap: 1.5rem;
+            }
+
+            .project-image {
+                height: 160px;
+            }
+
+            .project-content {
+                padding: 1.3rem;
+            }
+
+            .contact-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-email {
+                padding: 0.8rem 1.5rem;
+                word-break: break-word;
+            }
+        }
+
+        /* Small Mobile - 375px to 479px */
+        @media (max-width: 479px) {
+            nav {
+                padding: 0.9rem 5%;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 75px 5% 35px;
+            }
+
+            .hero-grid {
+                gap: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .profile-card {
+                padding: 1.8rem 1.3rem;
+                border-radius: 20px;
+            }
+
+            .profile-name {
+                font-size: 1.6rem;
+            }
+
+            .profile-image-wrapper,
+            .profile-image {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 1.5rem;
+            }
+
+            .corner {
+                width: 25px;
+                height: 25px;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .section-text {
+                font-size: 0.8rem;
+                line-height: 1.7;
+            }
+
+            .info-list li {
+                font-size: 0.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .skill-item[title="Canva"] .skill-icon-img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .intro-section {
+                margin-bottom: 2.5rem;
+            }
+
+            .intro-text {
+                margin-bottom: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.85rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .projects-section {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-heading {
+                margin-bottom: 1.5rem;
+            }
+
+            .projects-grid {
+                gap: 1.3rem;
+            }
+
+            .project-image {
+                height: 140px;
+            }
+
+            .project-content {
+                padding: 1.2rem;
+            }
+
+            .project-category {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.7rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .contact-section {
+                padding: 2rem 1.3rem;
+                border-radius: 20px;
+            }
+
+            .contact-subtitle {
+                margin-bottom: 2rem;
+            }
+
+            .contact-email {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+
+            .social-link {
+                width: 42px;
+                height: 42px;
+            }
+
+            .linkedin-link .linkedin-icon,
+            .behance-link .behance-icon,
+            .Figma-link .Figma-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            footer {
+                padding: 2rem 5%;
+            }
+        }
+
+        /* Extra Small Mobile - 320px to 374px */
+        @media (max-width: 374px) {
+            .logo {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 70px 5% 30px;
+            }
+
+            .profile-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .greeting {
+                font-size: 0.8rem;
+            }
+
+            .profile-name {
+                font-size: 1.4rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .profile-image-wrapper,
+            .profile-image {
+                width: 110px;
+                height: 110px;
+                margin-bottom: 1.3rem;
+            }
+
+            .corner {
+                width: 22px;
+                height: 22px;
+            }
+
+            .card-section {
+                margin-bottom: 1.3rem;
+                padding-bottom: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .section-text {
+                font-size: 0.75rem;
+            }
+
+            .info-list li {
+                font-size: 0.75rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .skills-grid {
+                gap: 0.4rem;
+            }
+
+            .skill-item[title="Canva"] .skill-icon-img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .project-image {
+                height: 130px;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            .project-category {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.6rem;
+            }
+
+            .contact-section {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .contact-email {
+                font-size: 0.85rem;
+                padding: 0.7rem 1.2rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+            }
+
+            .linkedin-link .linkedin-icon,
+            .behance-link .behance-icon,
+            .Figma-link .Figma-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Ultra Small Screens - below 320px */
+        @media (max-width: 319px) {
+            .container {
+                padding: 65px 4% 25px;
+            }
+
+            .profile-name {
+                font-size: 1.3rem;
+            }
+
+            .profile-image-wrapper,
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Landscape Orientation Adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                padding-top: 90px;
+                padding-bottom: 40px;
+            }
+
+            .profile-section {
+                position: relative;
+                top: 0;
+            }
+
+            .intro-section,
+            .projects-section {
+                margin-bottom: 2.5rem;
+            }
+
+            .orb {
+                opacity: 0.2;
+            }
+        }
+
+        /* High DPI Displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .profile-photo,
+            .project-img,
+            .skill-icon-img,
+            .linkedin-icon,
+            .behance-icon,
+            .Figma-icon {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .gradient-bg,
+            .gradient-orbs,
+            nav,
+            .cta-buttons,
+            footer {
+                display: none;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-section {
+                position: relative;
+                top: 0;
+            }
+
+            * {
+                background: white !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="gradient-bg"></div>
+    <div class="gradient-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Kartik Verma</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Grid Layout -->
+        <div class="hero-grid">
+            <!-- Left Column - Profile Card -->
+            <aside class="profile-section" id="about">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <p class="greeting">Hello, I am</p>
+                        <h1 class="profile-name">Kartik Verma</h1>
+                        
+                        <div class="profile-image-wrapper">
+                            <div class="profile-corners">
+                                <div class="corner corner-tl"></div>
+                                <div class="corner corner-tr"></div>
+                                <div class="corner corner-bl"></div>
+                                <div class="corner corner-br"></div>
+                            </div>
+                            <div class="profile-image">
+                                <img src="./images/download2.jpg" alt="Kartik Verma" class="profile-photo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-section">
+                        <h3 class="section-title">About Me</h3>
+                        <p class="section-text">
+                            Curious and passionate, I've always been interested in how visuals can shape the way 
+                            people feel and think. Over time, that curiosity led me to explore the side of designing, a field where 
+                            creativity meets problem-solving.
+                        </p>
+                        <p class="section-text" style="margin-top: 0.8rem;">
+                            Through this portfolio, I aim to show my approach as a designer who values clarity, 
+                            balance, and meaning in every project.
+                        </p>
+                    </div>
+
+                    <div class="card-section">
+                        <h3 class="section-title">Education</h3>
+                        <ul class="info-list">
+                            <li>2022 - Present</li>
+                            <li>Meerut Institute of Engineering and Technology, Meerut</li>
+                            <li>Bachelor of Technology, CSE-AI and ML</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-section">
+                        <h3 class="section-title">Skills</h3>
+                        <div class="skills-grid"> 
+                            <div class="skill-item" title="Figma">
+                                <div class="skill-icon-wrapper">
+                                    <svg width="35" height="40" viewBox="0 0 24 24" fill="none">
+                                        <path d="M8 24C10.2091 24 12 22.2091 12 20V16H8C5.79086 16 4 17.7909 4 20C4 22.2091 5.79086 24 8 24Z" fill="#0ACF83"/>
+                                        <path d="M4 12C4 9.79086 5.79086 8 8 8H12V16H8C5.79086 16 4 14.2091 4 12Z" fill="#A259FF"/>
+                                        <path d="M4 4C4 1.79086 5.79086 0 8 0H12V8H8C5.79086 8 4 6.20914 4 4Z" fill="#F24E1E"/>
+                                        <path d="M12 0H16C18.2091 0 20 1.79086 20 4C20 6.20914 18.2091 8 16 8H12V0Z" fill="#FF7262"/>
+                                        <path d="M20 12C20 14.2091 18.2091 16 16 16C13.7909 16 12 14.2091 12 12C12 9.79086 13.7909 8 16 8C18.2091 8 20 9.79086 20 12Z" fill="#1ABCFE"/>
+                                    </svg>
+                                </div>
+                            </div>                          
+                            <div class="skill-item" title="Premiere Pro">
+                                <div class="skill-icon-wrapper">
+                                    <svg width="45" height="45" viewBox="0 0 24 24">
+                                        <rect width="24" height="24" rx="5" fill="#00005B"/>
+                                        <text x="12" y="17" font-family="Arial, sans-serif" font-weight="bold" font-size="13" fill="#9999FF" text-anchor="middle">Pr</text>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="skill-item" title="Canva">
+                                <div class="skill-icon-wrapper">
+                                    <img src="./images/canvaseeklogo.png" alt="Canva" class="skill-icon-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column - Main Content -->
+            <main class="content-section">
+                <!-- Introduction -->
+                <section class="intro-section" id="home">
+                    <h2 class="intro-title">Creative Designer Crafting Digital Excellence</h2>
+                    <p class="intro-text">
+                        I'm a passionate UI/UX designer dedicated to creating intuitive and beautiful digital 
+                        experiences. With a keen eye for detail and a love for problem-solving, I transform 
+                        complex challenges into elegant, user-centered solutions that delight and inspire.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="uiux_design_Kartik_Verma_Resume.pdf"
+                        class="btn btn-primary"
+                        target="_blank"
+                        rel="noopener">
+                            View Resume
+                        </a>
+
+                        <a href="mailto:vermakartik0400@email.com"
+                        class="btn btn-secondary">
+                            Contact Me
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section class="projects-section" id="projects">
+                    <h2 class="section-heading">Featured Projects</h2>
+                    <div class="projects-grid">
+                        <article class="project-card">
+                            <div class="project-image">
+                                <img 
+                                    src="./images/Thumbnail.png" 
+                                    alt="Gaming Equipment Purchasing App preview"
+                                    class="project-img"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <span class="project-category">Mobile App</span>
+                                <h3 class="project-title">
+                                    <a href="https://www.figma.com/proto/TcRvXJiEnd9qAlAiFaN0nh/Gaming-Equipment-purchasing-app--Community-?node-id=2-1163&t=MRJWZ3iL5ojuuuP9-1" class="project-link">
+                                        Gaming Equipment Purchasing App
+                                    </a>
+                                </h3>
+                                <p class="project-description">
+                                    A niche e-commerce app focused on gaming gear, offering detailed product specs, comparisons, reviews, and fast checkout for gamers.
+                                </p>
+                            </div>
+                        </article>
+                        
+                        <article class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="./images/Thumbnail2.png"
+                                    alt="Fintech App mobile UI preview"
+                                    class="project-img"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <span class="project-category">Mobile App</span>
+                                <h3 class="project-title">
+                                    <a href="https://www.figma.com/proto/BioFo2qDuucf0RRXRKXFe2/Fintech-App--Community-?node-id=16-533&t=OaW73kx3TPjYGro1-1" class="project-link">
+                                        Fintech App
+                                    </a>
+                                </h3>
+                                <p class="project-description">
+                                    A secure digital finance app that helps users track spending, manage transactions, and make payments seamlessly with real-time insights and bank-level security.
+                                </p>
+                            </div>
+                        </article>
+                        
+                        <article class="project-card">
+                            <div class="project-image">
+                                <img
+                                    src="./images/Thumbnail3.png"
+                                    alt="SaaS Dashboard desktop UI preview"
+                                    class="project-img"
+                                />
+                            </div>
+                            <div class="project-content">
+                                <span class="project-category">Dashboard UI</span>
+                                <h3 class="project-title">
+                                    <a href="https://www.figma.com/proto/ptV1OWrkr4rVICuBTWITjr/SAAS-Dashboard?node-id=0-1&t=kfa2ZOjZJG6wMVBf-1" class="project-link">
+                                        SAAS Dashboard
+                                    </a>
+                                </h3>
+                                <p class="project-description">
+                                    A data-driven admin dashboard that visualizes analytics, manages users, and streamlines workflows through role-based access and interactive reports.
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Contact -->
+                <section class="contact-section" id="contact">
+                    <h2 class="contact-title">Let's Create Together</h2>
+                    <p class="contact-subtitle">
+                        I'm always open to discussing new projects, creative ideas, or opportunities 
+                        to be part of your vision. Let's connect!
+                    </p>
+                    <a href="mailto:vermakartik0400@gmail.com" class="contact-email">vermakartik0400@gmail.com</a>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/kartik--verma/"
+                            class="social-link linkedin-link"
+                            title="LinkedIn"
+                            target="_blank"
+                            rel="noopener">
+                            <img src="./images/linkedin.png" alt="LinkedIn" class="linkedin-icon">
+                        </a>
+
+                        <a href="https://www.behance.net/kartikverma58"
+                            class="social-link behance-link"
+                            title="Behance"
+                            target="_blank"
+                            rel="noopener">
+                            <img src="./images/behance.png" alt="Behance" class="behance-icon">
+                        </a>
+
+                        <a href="https://www.figma.com/@kartikverma2"
+                            class="social-link Figma-link"
+                            title="Figma"
+                            target="_blank"
+                            rel="noopener">
+                            <img src="./images/figma.png" alt="Figma" class="Figma-icon">
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            © 2026 Kartik Verma · UI/UX Designer <br>
+            Designed & built by me
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling (internal links only)
+        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = 80;
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.pageYOffset -
+                        navHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Project cards animation
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition =
+                `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Observe main sections
+        document.querySelectorAll('.profile-card, .content-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Active nav link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function setActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--text-primary)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveNav);
+    </script>
+</body>
+</html>
